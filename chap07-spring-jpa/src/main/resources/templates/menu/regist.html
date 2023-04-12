@@ -31,21 +31,24 @@
 	
 		$(function(){
 			$.ajax({
-				url : '/menu/category',
-				success : function(data) {
-					console.log(data);
+				//ajax 함수안에 객체형태로 통신에 필요한 정보를 전달한다
+				url : '/menu/category',    //주소값
+				success : function(data) { //성공시 전달되는 콜백함수
+					console.log(data);//data: AJAX 통신 결과로 받아온 JSON 형태의 데이터 
 					
+					//select라는 엘리먼트쪽으로 조회한 데이터를 넣어주는 처리 필요
+					//문자열로 쭉 만들어놓고 한번에 인서트 하자
 					let html = '';
-					
-					for(let index in data) {
+					//문자열 만들기 
+					for(let index in data) {//date는 배열, 배열을 반복한다
 						html += `<option value='${data[index].categoryCode}'>${data[index].categoryName}</option>`;
 					}
 					
 					document.querySelector("#categoryCode").insertAdjacentHTML('beforeend', html);
 					
 				},
-				error : function(xhr) {
-					console.log(xhr);
+				error : function(xhr) {  //실패시 전달되는 콜백함수
+					console.log(xhr); //xhr: AJAX 통신에 대한 응답 정보를 담고 있음, 실패했을 때 응답 정보를 출력하는 것		
 				}
 			});
 		});

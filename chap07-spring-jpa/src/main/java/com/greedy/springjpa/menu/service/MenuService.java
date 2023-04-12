@@ -29,13 +29,14 @@ public class MenuService {
 	}
 	
 	/* 영속성 객체(엔티티)를 그대로 사용하면 데이터가 훼손 될 가능성이 있으므로 비영속 객체로 변경해서 반환한다. */
-	
+	//7번 메뉴 조회
 	public MenuDTO findMenuByCode(int menuCode) {
 		
 		/* Menu -> MenuDTO로 변환할 수 있는 ModelMapper 라이브러리 의존성 추가 후 사용 */
 		return modelMapper.map(menuRepository.findMenuByCode(entityManager, menuCode), MenuDTO.class);
 	}
 	
+	//전체 메뉴 조회
 	public List<MenuDTO> findAllMenu() {
 		
 		List<Menu> menuList = menuRepository.findAllMenu(entityManager);
@@ -44,6 +45,7 @@ public class MenuService {
 		
 	}
 	
+	//전체 카테고리 조회
 	public List<CategoryDTO> findAllCategory() {
 		
 		List<Category> categoryList = menuRepository.findAllCategory(entityManager);
@@ -56,12 +58,14 @@ public class MenuService {
 	 * 클래스 레벨과 메소드 레벨에 작성 될 수 있고 클래스 레벨에 작성 시 하위 모든 메소드에 적용된다.
 	 * 어노테이션이 선언 되면 메소드 호출 시 자동으로 프록시 객체가 생성 되며 해당 프록시 객체는 정상 수행 여부에 따라
 	 * commit, rollback 처리를 한다. */
+	//메뉴 인서트
 	@Transactional
 	public void registNewMenu(MenuDTO newMenu) {
 		
 		menuRepository.registNewMenu(entityManager, modelMapper.map(newMenu, Menu.class));
 	}
 	
+	//메뉴 수정
 	@Transactional
 	public void modifyMenu(MenuDTO menu) {
 		

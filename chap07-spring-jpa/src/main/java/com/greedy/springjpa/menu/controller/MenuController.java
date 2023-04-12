@@ -31,7 +31,6 @@ public class MenuController {
 		
 		MenuDTO menu = menuService.findMenuByCode(menuCode);
 //		System.out.println("menu = " + menu) ;
-		////
 		
 		model.addAttribute("menu", menu);
 		
@@ -48,16 +47,17 @@ public class MenuController {
 		return "menu/list";
 	}
 	
+	//메뉴 등록
 	@GetMapping("/regist")
 	public void registPage() {}
-	
+	//카테고리 목록 조회 비동기처리
 	@GetMapping(value="category", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public List<CategoryDTO> findCategoryList() {
 		
 		return menuService.findAllCategory();
 	}
-	
+	//메뉴 등록
 	@PostMapping("/regist")
 	public String registMenu(@ModelAttribute MenuDTO newMenu) {
 		
@@ -66,6 +66,7 @@ public class MenuController {
 		return "redirect:/menu/list";
 	}
 	
+	//메뉴 수정
 	@GetMapping("/modify")
 	public void modifyPage() {}
 	
